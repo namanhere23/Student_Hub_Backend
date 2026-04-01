@@ -40,6 +40,14 @@ If successful, you will see it responding locally at `http://0.0.0.0:8080`.
 
 ---
 
+## 📡 API Reference
+
+| Method | Endpoint | Description | Request Body |
+|--------|----------|-------------|--------------|
+| `GET`  | `/health` | Health-check endpoint — returns `{"status": "Awake and healthy"}` | — |
+| `POST` | `/send` | Send a push notification to a specific device via its FCM token | `{ "to": "<FCM token>", "notification": { "title": "...", "body": "..." } }` |
+| `POST` | `/broadcast` | Broadcast a notification to all devices subscribed to the `Chat` topic | `{ "to": null, "notification": { "title": "...", "body": "..." } }` |
+
 ## 🚀 Individual Deployment Guide
 
 To deploy this Kotlin service to a production cloud like **Render**, **Heroku**, or a VPS, independently of the Cloudinary backend:
