@@ -1,0 +1,21 @@
+# Root Environment Variables
+.env
+.env.*
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ignore temporary or cache files
+dist/
+build/
+node_modules/
+
+# Ensure secure files are blocked globally just in case
+service_account_key.json
+firebase.json
+*.pem

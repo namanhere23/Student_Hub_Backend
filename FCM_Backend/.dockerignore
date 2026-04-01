@@ -1,0 +1,24 @@
+# Ignore build artifacts
+build/
+.gradle/
+
+# Ignore IDE files
+.idea/
+.vscode/
+*.iml
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore Git
+.git/
+.gitignore
+
+# Ignore documentation
+*.md
+README.md
+
+# Ignore scripts (not needed in container)
+build.sh
+start.sh
