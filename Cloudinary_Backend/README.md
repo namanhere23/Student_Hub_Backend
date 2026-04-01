@@ -19,7 +19,7 @@ npm install
 ```
 
 ### 3. Configure Environment Variables
-Create a `.env` file either inside this folder, or one level up in the root directory. Add the following variables:
+Create a `.env` file **in the repository root** (the parent of `Cloudinary_Backend/`). Add the following variables:
 
 ```env
 CORS_ORIGIN=<your-client-url>
@@ -29,6 +29,8 @@ CLOUDNINARY_API_SECRET=<your-cloudinary-secret>
 PORT=8000
 ```
 *(Replace the placeholders with your actual Cloudinary credentials).*
+
+> **Note:** The env var names use `CLOUDNINARY` (not `CLOUDINARY`) — this matches the codebase. Use these exact names.
 
 ### 4. Run the Backend Server
 Once the variables are configured, start the server:
@@ -43,6 +45,17 @@ npm run dev
 npm start
 ```
 
+> **Note:** `npm run dev` auto-loads `.env` via the `dotenv` CLI flag. With `npm start`, environment variables must be set in your shell or by your cloud provider — the `.env` file is **not** loaded automatically.
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET`  | `/checks` | Health-check — returns `{"message": "ok"}` |
+| `POST` | `/api/v1/uploadMedia` | Upload a media file (image/video/document) to Cloudinary. Send as `multipart/form-data` with a `media` field. |
+
 ---
 
 ## 🚀 Individual Deployment Guide
@@ -53,8 +66,8 @@ To deploy this specific Node.js (Express) backend to a production service like *
 Because this backend is located inside a sub-folder (`Cloudinary_Backend`), you must tell your hosting provider where to build and run the code.
 
 - **Option A (Render/Railway):** In your Web Service settings, set the **"Root Directory"** to `Cloudinary_Backend`.
-- **Build Command:** `npm install`
-- **Start Command:** `npm start` 
+  - **Build Command:** `npm install`
+  - **Start Command:** `npm start`
 
 *(Note: If your hosting provider does not support root directory overrides, you might need to adjust your setup or deploy this subfolder uniquely using CLI tools).*
 
@@ -64,7 +77,21 @@ Add your secrets securely to your provider's dashboard using the variables defin
 - `CLOUDNINARY_CLOUD_NAME`
 - `CLOUDNINARY_API_KEY`
 - `CLOUDNINARY_API_SECRET`
-- `PORT` (Usually optional as platforms assign this dynamically)
+- `PORT`
 
 ### Step 3: Deploy
 Trigger a manual deployment. The server will start up running the Node server exclusively on the port given by your cloud provider.
+
+### Step 4: Keep the Server Active (Render Free Tier)
+
+Render's free tier spins down your service after **15 minutes of inactivity**. To prevent this, set up a free uptime monitor:
+
+1. Sign up at [UptimeRobot](https://uptimerobot.com/) (free plan is sufficient).
+2. Create a new **HTTP(s)** monitor.
+3. Set the URL to your deployed health-check endpoint:
+
+   https://<your-app>.onrender.com/checks
+
+4. Set the monitoring interval to **every 5 minutes**.
+
+This pings your server regularly so Render never puts it to sleep.

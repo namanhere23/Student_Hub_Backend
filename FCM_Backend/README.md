@@ -44,12 +44,13 @@ If successful, you will see it responding locally at `http://0.0.0.0:8080`.
 
 To deploy this Kotlin service to a production cloud like **Render**, **Heroku**, or a VPS, independently of the Cloudinary backend:
 
-### Step 1: Use Docker for Easy Deployment
-This folder already contains a custom `Dockerfile`. When setting up a Web Service, you should tell your hosting provider to use this Dockerfile to build and run the application.
+### Option A: Docker Deployment (Recommended)
 
-- **Option A (Render/Railway):** Create a new Web Service.
-- **Root Directory:** Set the Root to `FCM_Backend`.
-- **Environment/Build Type:** Choose **Docker**.
+This folder already contains a custom `Dockerfile`.
+
+1. **Create a new Web Service** on your hosting provider.
+   - **Root Directory:** Set the Root to `FCM_Backend`.
+   - **Environment/Build Type:** Choose **Docker**.
 
 ### Step 2: Set Environment Variables instead of the JSON file
 You cannot push `service_account_key.json` to GitHub, so your production server won't have it automatically. Instead, provide it securely:
@@ -61,3 +62,17 @@ You cannot push `service_account_key.json` to GitHub, so your production server 
 
 ### Step 3: Deploy
 Trigger a deployment. The Dockerfile will compile the Kotlin app and start a self-contained runtime server, pulling your stringified Firebase key automatically on startup.
+
+### Step 4: Keep the Server Active (Render Free Tier)
+
+Render's free tier spins down your service after **15 minutes of inactivity**. To prevent this, set up a free uptime monitor:
+
+1. Sign up at [UptimeRobot](https://uptimerobot.com/) (free plan is sufficient).
+2. Create a new **HTTP(s)** monitor.
+3. Set the URL to your deployed health-check endpoint:
+   ```
+   https://<your-app>.onrender.com/health
+   ```
+4. Set the monitoring interval to **every 5 minutes**.
+
+This pings your server regularly so Render never puts it to sleep.

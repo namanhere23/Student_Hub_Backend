@@ -17,7 +17,6 @@ Thumbs.db
 
 # Ignore documentation
 *.md
-README.md
 
 # Ignore scripts (not needed in container)
 build.sh
