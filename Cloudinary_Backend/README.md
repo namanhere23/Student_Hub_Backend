@@ -22,7 +22,7 @@ npm install
 Create a `.env` file **in the repository root** (the parent of `Cloudinary_Backend/`). Add the following variables:
 
 ```env
-CORS_ORIGIN=<your-client-url>
+CORS_ORIGIN=*
 CLOUDNINARY_CLOUD_NAME=<your-cloudinary-name>
 CLOUDNINARY_API_KEY=<your-cloudinary-key>
 CLOUDNINARY_API_SECRET=<your-cloudinary-secret>
@@ -73,7 +73,7 @@ Because this backend is located inside a sub-folder (`Cloudinary_Backend`), you 
 
 ### Step 2: Set Environment Variables
 Add your secrets securely to your provider's dashboard using the variables defined in step 3 above:
-- `CORS_ORIGIN` (Your frontend's production URL)
+- `CORS_ORIGIN=*` 
 - `CLOUDNINARY_CLOUD_NAME`
 - `CLOUDNINARY_API_KEY`
 - `CLOUDNINARY_API_SECRET`
