@@ -23,7 +23,7 @@ cd FCM_Backend
 ### 3. Firebase Set Up (`service_account_key.json`)
 The FCM SDK must be authenticated as an admin on your Firebase project.
 
-1. Go to your [Firebase Console](https://console.firebase.google.com/).
+1. Go to your [Firebase Console](https://console.firebase.google.com/) and open the student hub project.
 2. Click the gear icon near the top left -> **Project settings** -> **Service accounts**.
 3. Generate a new private key. This downloads a `.json` file.
 4. Rename your downloaded file to exactly `service_account_key.json`.

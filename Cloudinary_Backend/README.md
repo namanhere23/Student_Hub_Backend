@@ -19,18 +19,17 @@ npm install
 ```
 
 ### 3. Configure Environment Variables
+Go to [Cloudinary](https://cloudinary.com/console/settings) and create a free account.
 Create a `.env` file **in the repository root** (the parent of `Cloudinary_Backend/`). Add the following variables:
 
 ```env
 CORS_ORIGIN=<your-client-url>
-CLOUDNINARY_CLOUD_NAME=<your-cloudinary-name>
-CLOUDNINARY_API_KEY=<your-cloudinary-key>
-CLOUDNINARY_API_SECRET=<your-cloudinary-secret>
+CLOUDINARY_CLOUD_NAME=<your-cloudinary-name>
+CLOUDINARY_API_KEY=<your-cloudinary-key>
+CLOUDINARY_API_SECRET=<your-cloudinary-secret>
 PORT=8000
 ```
 *(Replace the placeholders with your actual Cloudinary credentials).*
-
-> **Note:** The env var names use `CLOUDNINARY` (not `CLOUDINARY`) — this matches the codebase. Use these exact names.
 
 ### 4. Run the Backend Server
 Once the variables are configured, start the server:
@@ -60,23 +59,25 @@ npm start
 
 ## 🚀 Individual Deployment Guide
 
-To deploy this specific Node.js (Express) backend to a production service like **Render**, **Railway**, or **Vercel** independently of the FCM backend:
+To deploy this specific Node.js (Express) backend to a production service like **Render**, **Railway**, or **Vercel**:
 
 ### Step 1: Configure Your Hosting Provider
+- Select the **Web Service** option.
+- Connect your GitHub repository.
+- Select the repository 
+- Select Node as the language
+
 Because this backend is located inside a sub-folder (`Cloudinary_Backend`), you must tell your hosting provider where to build and run the code.
 
-- **Option A (Render/Railway):** In your Web Service settings, set the **"Root Directory"** to `Cloudinary_Backend`.
-  - **Build Command:** `npm install`
-  - **Start Command:** `npm start`
-
-*(Note: If your hosting provider does not support root directory overrides, you might need to adjust your setup or deploy this subfolder uniquely using CLI tools).*
+- **Build Command:** `npm install`
+- **Start Command:** `npm start`
 
 ### Step 2: Set Environment Variables
 Add your secrets securely to your provider's dashboard using the variables defined in step 3 above:
 - `CORS_ORIGIN` (Your frontend's production URL)
-- `CLOUDNINARY_CLOUD_NAME`
-- `CLOUDNINARY_API_KEY`
-- `CLOUDNINARY_API_SECRET`
+- `CLOUDINARY_CLOUD_NAME`
+- `CLOUDINARY_API_KEY`
+- `CLOUDINARY_API_SECRET`
 - `PORT`
 
 ### Step 3: Deploy
